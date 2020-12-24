@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "get_next_line.h"
 
 int		get_next_line(int fd, char **line)
@@ -21,20 +23,19 @@ int		get_next_line(int fd, char **line)
 	len = BUFFER_SIZE;
 	while (len == BUFFER_SIZE)
 	{
-		if (!next || next == backup + BUFFER_SIZE)
+		if (!next || next >= backup + BUFFER_SIZE)
 		{
 			len = read(fd, backup, BUFFER_SIZE);
-			printf("if %s\n", backup);
+			printf("read len : %d", len);
 			if (len == ERROR || len == END)
 				return (len);
 			next = backup;
 		}
 		len = cat_str_del(line, backup, '\n', fd);
-		printf("%d\n", len);	
 		if (len == ERROR || len == END)
 			return (len);
 		next += (len + 1);
-		printf("%p\n", next);
+		printf("1   %p\n", next);
 	}
 	return (SUCCESS);
 }

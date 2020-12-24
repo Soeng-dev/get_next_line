@@ -18,14 +18,12 @@ void 	putstr(char *s)
 void	main(int ac, char *av[])
 {
 	int	fd = open("./for_test.txt", O_RDWR);
-	char *read = (char *)malloc(2);
+	char 	*read = (char *)malloc(2);
 	*read = '\0';
 	int i = SUCCESS;
-	(i = get_next_line(fd, &read)) == SUCCESS;
-		printf("%d|		|%s\n",i, read);
-
-	(i = get_next_line(fd, &read)) == SUCCESS;
-		printf("%d|		|%s\n",i, read);
-	(i = get_next_line(fd, &read)) == SUCCESS;
-		printf("%d|		|%s\n",i, read);
+	while(i == SUCCESS)
+	{
+		i = get_next_line(fd, &read);
+		printf("%s\n", read);
+	}
 }

@@ -15,12 +15,16 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
 # include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
-# define ERROR			-1
-# define END			0
-# define SUCCESS		1
+# define ERROR		-1
+# define END		0
+# define SUCCESS	1
+
+//for test
+# define BUFFER_SIZE 32
 
 struct	s_file
 {

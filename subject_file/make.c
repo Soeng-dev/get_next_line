@@ -21,7 +21,8 @@ void	maketxt(int fd, int len, int line)
 
 void	main(int ac, char *av[])
 {
-	int fd =  open("./for_test.txt", O_RDWR | O_TRUNC);
+	close(0);
+	int fd =  open("./for_test.txt", O_CREAT | O_RDWR | O_TRUNC);
 	if(ac)
 		maketxt(fd, atoi(av[1]), atoi(av[2]));
 	close(fd);
