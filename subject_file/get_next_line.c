@@ -18,24 +18,32 @@ int		get_next_line(int fd, char **line)
 {
 	static char	backup[BUFFER_SIZE + 1];
 	static char	*next;
-	int			len;
+	int		result;
+	int		unread;	
 
-	len = BUFFER_SIZE;
-	while (len == BUFFER_SIZE)
+	unread = 1;
+	while (1)
 	{
 		if (!next || next >= backup + BUFFER_SIZE)
 		{
-			len = read(fd, backup, BUFFER_SIZE);
-			printf("read len : %d", len);
-			if (len == ERROR || len == END)
-				return (len);
+			result = read(fd, backup, BUFFER_SIZE);
+			backup[result] = '\0';
+			printf("read len : %d\ncontents\n%s////\n---------------------\n",result, backup);
+			if (result == ERROR || result == END)
+				return (result);
+			unread = result;
 			next = backup;
 		}
-		len = cat_str_del(line, backup, '\n', fd);
-		if (len == ERROR || len == END)
-			return (len);
-		next += (len + 1);
-		printf("1   %p\n", next);
+		else if (unread == 0)
+			return (END);
+			printf("unread : %d\n", unread);
+		result = strcat_del(line, next, '\n');
+		if (result == ERROR)
+			return (ERROR);
+		unread -= (result + 1);
+		next += (result + 1);
+		printf("next : %p||	%s\n",next,next);
+		printf("oneloopdone=====================\n");
 	}
 	return (SUCCESS);
 }

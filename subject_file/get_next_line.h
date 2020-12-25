@@ -23,9 +23,6 @@
 # define END		0
 # define SUCCESS	1
 
-//for test
-# define BUFFER_SIZE 32
-
 struct	s_file
 {
 	char	**line;
@@ -42,6 +39,7 @@ typedef struct s_cat	t_cat;
 size_t	ft_strlen(const char *s);
 char	*ft_strcpy(char *dst, const char *src);
 int		strdel_len(char *s, char delimiter);
-int		cat_str_del(char **line, char *to_catenate, char delimiter, int fd);
+int		strcat_del(char **line, char *to_catenate, char delimiter);
+int		min(int a, int b);
 int		get_next_line(int fd, char **line);
 #endif

@@ -61,7 +61,12 @@ int		strdel_len(char *s, char delimiter)
 	return (len);
 }
 
-int		cat_str_del(char **line, char *to_catenate, char delimiter, int fd)
+int		min(int a, int b)
+{
+	return ((a < b) ? a : b);
+}
+
+int		strcat_del(char **line, char *to_catenate, char delimiter)
 {
 	int		cat_len;
 	char	*tab;
