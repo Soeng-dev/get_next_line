@@ -25,7 +25,7 @@ void	main(void)
 	{
 		i = get_next_line(fd, &read);
 	}
-	printf("\n\nresult\n\n");
-	printf("%s\n",read);
+	//printf("\n\nresult\n\n");
+	//printf("%s\n",read);
 
 }
