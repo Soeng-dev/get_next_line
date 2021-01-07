@@ -81,8 +81,8 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	tab = ft_strcpy(newstr, *line);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
 	*tab = '\0';
-	//if (line)
-		//free(*line);
+	if (line)
+		free(*line);
 	*line = newstr;
 	return (cat_len);
 }
