@@ -97,7 +97,7 @@ int
 	{
 		printf("debug : start file %s\n", tests[i]);
 		fd = open(tests[i], O_RDONLY);
-		printf("it opened\n");//debug
+		printf("debug : %s opened\n", tests[i]);//debug
 		test_fd(&buffer, tests[i++], fd);
 		close(fd);
 	}

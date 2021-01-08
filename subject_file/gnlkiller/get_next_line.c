@@ -26,7 +26,7 @@ int		get_next_line(int fd, char **line)
 		{
 			result = read(fd, backup, BUFFER_SIZE);
 			backup[result] = '\0';
-			//printf("read len : %d\ncontents\n%s////\n---------------------\n",result, backup);
+			printf("read len : %d\ncontents\n%s////\n---------------------\n",result, backup);
 			if (result == ERROR || result == END)
 				return (result);
 			unread = result;
@@ -34,14 +34,14 @@ int		get_next_line(int fd, char **line)
 		}
 		else if (unread == 0)
 			return (END);
-			//printf("unread : %d\n", unread);
+			printf("unread : %d\n", unread);
 		result = strcat_del(line, next, '\n');
 		if (result == ERROR)
 			return (ERROR);
 		unread -= (result + 1);
 		next += (result + 1);
-		//printf("next : %p||	%s\n",next,next);
-		//printf("oneloopdone=====================\n");
+		printf("next : %p||	%s\n",next,next);
+		printf("oneloopdone=====================\n");
 	}
 	return (SUCCESS);
 }

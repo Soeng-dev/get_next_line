@@ -61,10 +61,6 @@ int		strdel_len(char *s, char delimiter)
 	return (len);
 }
 
-int		min(int a, int b)
-{
-	return ((a < b) ? a : b);
-}
 
 int		strcat_del(char **line, char *to_catenate, char delimiter)
 {
@@ -75,7 +71,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	if (!to_catenate)
 		return (0);
 	cat_len = strdel_len(to_catenate, delimiter);
-	//printf("cat len : %d\n", cat_len);
+	printf("cat len : %d\n", cat_len);
 	if (!(newstr = (char *)malloc(ft_strlen(*line)+ cat_len + 1)))
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);
