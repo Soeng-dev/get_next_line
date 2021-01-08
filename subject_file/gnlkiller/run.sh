@@ -24,4 +24,4 @@ do
 done
 
 rm -f get_next_line
-rm -f output
+

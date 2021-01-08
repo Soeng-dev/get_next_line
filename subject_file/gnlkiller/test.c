@@ -25,6 +25,7 @@ void	sigcatch()
 void
 	test_fd(char **buffer, char const *filename, int fd)
 {
+	printf("came to test_fd\n");//debug
 	int	r;
 
 	alarm(5);
@@ -34,6 +35,8 @@ void
 	else
 		printf("Reading %s...\n---\n", filename);
 
+
+	printf("start loop\n");//debug
 	while ((r = get_next_line(fd, buffer)) > 0)
 	{
 		printf("%2d-%s\n", r, *buffer);
@@ -50,6 +53,7 @@ void
 	else
 		printf("%2d#error\n---\n", r);
 
+	printf("before free\n");
 	if (*buffer)
 	{
 		free(*buffer);
@@ -91,7 +95,9 @@ int
 	i = 0;
 	while (i < test_count)
 	{
+		printf("debug : start file %s\n", tests[i]);
 		fd = open(tests[i], O_RDONLY);
+		printf("it opened\n");//debug
 		test_fd(&buffer, tests[i++], fd);
 		close(fd);
 	}
