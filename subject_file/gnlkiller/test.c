@@ -6,7 +6,7 @@
 /*   By: aseo <aseo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:39:00 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/25 13:53:11 by aseo             ###   ########.fr       */
+/*   Updated: 2021/01/08 17:05:11 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void
 	printf("start loop\n");//debug
 	while ((r = get_next_line(fd, buffer)) > 0)
 	{
+		printf("debug: before printf\n");
 		printf("%2d-%s\n", r, *buffer);
 		if (*buffer)
 		{
