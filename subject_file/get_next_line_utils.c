@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2020/11/29 17:48:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/13 01:12:21 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (*(s++))
-		len++;
+	if (s)
+	{
+		while (*(s++))
+			len++;
+	}
 	return (len);
+	
 }
 
 char	*ft_strcpy(char *dst, const char *src)

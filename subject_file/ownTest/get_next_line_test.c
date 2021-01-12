@@ -18,8 +18,7 @@ void 	putstr(char *s, int fd)
 void	main(void)
 {
 	int	fd = open("./for_test.txt", O_RDWR);
-	char 	*read = (char *)malloc(1);
-	*read = '\0';
+	char 	*read = NULL;
 	int i = SUCCESS;
 	while(i == SUCCESS)
 	{
