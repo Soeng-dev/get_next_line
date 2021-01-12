@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2020/11/29 17:47:48 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/13 07:01:31 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		get_next_line(int fd, char **line)
 		result = strcat_del(line, next, '\n');
 		if (result == ERROR)
 			return (ERROR);
-		unread -= (result + 1);
-		next += (result + 1);
+		unread -= result;
+		next += result;
 		//printf("next : %p||	%s\n",next,next);
 		//printf("oneloopdone=====================\n");
 	}

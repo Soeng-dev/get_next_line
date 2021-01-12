@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/13 01:12:21 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/13 06:56:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		strdel_len(char *s, char delimiter)
 		s++;
 		len++;
 	}
-	return (len);
+	return (++len);
 }
 
 int		min(int a, int b)
