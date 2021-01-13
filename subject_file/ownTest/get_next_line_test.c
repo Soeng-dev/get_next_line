@@ -22,12 +22,11 @@ void	main(int argc, char *argv[])
 	else
 		fd = atoi(argv[1]);
 	char 	* r= NULL;
-	//int i = SUCCESS;
-	/*while(i == SUCCESS)
+	int i = SUCCESS;
+	while(i == SUCCESS)
 	{
-		i = get_next_line(fd, &read);
-	}*/
-	read(-1,r, BUFFER_SIZE);
+		i = get_next_line(fd, &r);
+	}
 	printf("\n\nresultof fd : %d\n\n",fd);
 	printf("%s\n",r);
 
