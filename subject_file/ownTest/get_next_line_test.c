@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
 void 	putstr(char *s, int fd)
 {
 	if (!s)
@@ -15,16 +14,21 @@ void 	putstr(char *s, int fd)
 	}
 }
 
-void	main(void)
+void	main(int argc, char *argv[])
 {
-	int	fd = open("./for_test.txt", O_RDWR);
-	char 	*read = NULL;
-	int i = SUCCESS;
-	while(i == SUCCESS)
+	volatile int fd;
+	if (argc < 2)
+		fd = open("./for_test.txt", O_RDWR);
+	else
+		fd = atoi(argv[1]);
+	char 	* r= NULL;
+	//int i = SUCCESS;
+	/*while(i == SUCCESS)
 	{
 		i = get_next_line(fd, &read);
-	}
-	printf("\n\nresult\n\n");
-	printf("%s\n",read);
+	}*/
+	read(-1,r, BUFFER_SIZE);
+	printf("\n\nresultof fd : %d\n\n",fd);
+	printf("%s\n",r);
 
 }

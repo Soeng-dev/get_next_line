@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/13 07:01:31 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/14 03:44:20 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		get_next_line(int fd, char **line)
 	int		result;
 	int		unread;	
 
+	if (!line || BUFFER_SIZE <= 0)
+		return (ERROR);
 	unread = 1;
 	while (1)
 	{
