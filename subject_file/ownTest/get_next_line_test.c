@@ -28,6 +28,6 @@ void	main(int argc, char *argv[])
 		i = get_next_line(fd, &r);
 	}
 	printf("\n\nresultof fd : %d\n\n",fd);
-	printf("%s\n",r);
+	printf("%s",r);
 
 }
