@@ -1,4 +1,4 @@
-#include "../get_next_line.h"
+ #include "../GNL_lover/copy_in_here_GNL_files/get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
