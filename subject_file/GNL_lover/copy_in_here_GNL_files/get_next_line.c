@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/20 18:40:56 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/20 18:47:44 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		get_next_line(int fd, char **line)
 		if (!next || next >= backup + BUFFER_SIZE)
 		{
 			result = read(fd, backup, BUFFER_SIZE);
-			backup[result] = '\0';
+			for (int i = result; i <= BUFFER_SIZE; i++)
+				backup[i] = '\0';
 			//printf("read len : %d\ncontents\n%s////\n---------------------\n",result, backup);
 			if (!next && result == END)
 			{
