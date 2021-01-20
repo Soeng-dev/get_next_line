@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/14 03:44:20 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/20 18:40:56 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int		get_next_line(int fd, char **line)
 			result = read(fd, backup, BUFFER_SIZE);
 			backup[result] = '\0';
 			//printf("read len : %d\ncontents\n%s////\n---------------------\n",result, backup);
+			if (!next && result == END)
+			{
+				*line = (char *)malloc(1);
+				**line = '\0';
+				return (END);
+			}
 			if (result == ERROR || result == END)
 				return (result);
 			unread = result;
