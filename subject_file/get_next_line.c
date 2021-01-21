@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/21 13:34:19 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/21 15:13:18 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		get_next_line(int fd, char **line)
 
 	if (!line || BUFFER_SIZE < 0)
 		return (ERROR);
-	unread = 1;
 	while (1)
 	{
 		if (!next || next >= backup + BUFFER_SIZE)
@@ -44,6 +43,8 @@ int		get_next_line(int fd, char **line)
 		else if (unread == 0)
 			return (END);
 			//printf("unread : %d\n", unread);
+		if (next >= backup && *(next - 1) == '\n')
+			**line = '\n';
 		result = strcat_del(line, next, '\n');
 		if (result == ERROR)
 			return (ERROR);
