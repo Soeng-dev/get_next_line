@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/21 15:13:59 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/21 16:47:19 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	if (!to_catenate)
 		return (0);
 	cat_len = strdel_len(to_catenate, delimiter);
-	//printf("cat len : %d\n", cat_len);
 	if (!(newstr = (char *)malloc(ft_strlen(*line)+ cat_len + 1)))
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);
