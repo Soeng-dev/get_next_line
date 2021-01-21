@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/20 19:21:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/21 13:34:19 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int		get_next_line(int fd, char **line)
 			return (ERROR);
 		unread -= result;
 		next += result;
+		if (*(next - 1) == '\n')
+			return (SUCCESS);
 		//printf("next : %p||	%s\n",next,next);
 		//printf("oneloopdone=====================\n");
 	}
-	return (SUCCESS);
 }
