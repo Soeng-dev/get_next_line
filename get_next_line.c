@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/21 17:59:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:03:15 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		get_next_line(int fd, char **line)
 	int		result;
 	int		unread;	
 
-	if (!line || BUFFER_SIZE <= 0)
+	if (!line || BUFFER_SIZE < 0)
 		return (ERROR);
 	while (1)
 	{
@@ -27,6 +27,7 @@ int		get_next_line(int fd, char **line)
 		{
 			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
+			//subsitute for loop to function
 			for (int i = result; i <= BUFFER_SIZE; i++)
 				backup[i] = '\0';
 			if (result == END)
@@ -43,10 +44,13 @@ int		get_next_line(int fd, char **line)
 		}
 		else if (unread == 0)
 			return (END);
+		if (next > backup && *(next - 1) == '\n')
+			*line = NULL;
 		if ((result = strcat_del(line, next, '\n')) == ERROR)
 			return (ERROR);
 		unread -= result;
 		next += result;
+		if (*(next - 1) == '\n')
+			return (SUCCESS);
 	}
-	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2020/11/29 10:28:28 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/22 11:17:47 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 size_t	ft_strlen(const char *s);
 char	*ft_strcpy(char *dst, const char *src);
-int		strdel_len(char *s, char delimiter);
-int		strcat_del(char **line, char *to_catenate, char delimiter);
+int		strdel_len(char *s, char delimiter, int *is_delimited);
+int		strcat_del(char **line, char *to_catenate, char delimiter, int *is_delimited);
 int		min(int a, int b);
 int		get_next_line(int fd, char **line);
 #endif
