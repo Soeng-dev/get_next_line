@@ -14,20 +14,17 @@ void 	putstr(char *s, int fd)
 	}
 }
 
-void	main(int argc, char *argv[])
+void	main()
 {
 	volatile int fd;
-	if (argc < 2)
 		fd = open("./for_test.txt", O_RDWR);
-	else
-		fd = atoi(argv[1]);
 	char 	* r= NULL;
+	char buf[100];
 	int i = SUCCESS;
+
 	while(i == SUCCESS)
 	{
 		i = get_next_line(fd, &r);
+		printf("|%s",r);
 	}
-	printf("\n\nresultof fd : %d\n\n",fd);
-	printf("%s",r);
-
 }
