@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/22 11:16:30 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/22 11:43:05 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		get_next_line(int fd, char **line)
 			unread = result;
 			next = backup;
 		}
+		//not directly alloc to line, use char *temp and when return success do line = temp;
+		if (
 		if ((result = strcat_del(line, next, '\n', &is_newline)) == ERROR)
 			return (ERROR);
 		unread -= result;
