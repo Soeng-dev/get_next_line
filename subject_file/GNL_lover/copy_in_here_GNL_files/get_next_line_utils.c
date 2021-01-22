@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/22 11:15:24 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:54:54 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strncpy(char *dst, const char *src, int len)
 	}
 	return (dst);
 }
-int		strdel_len(char *s, char delimiter, int *is_delimited)
+int		strdel_len(char *s, char delimiter)
 {
 	int		len;
 
@@ -63,16 +63,11 @@ int		strdel_len(char *s, char delimiter, int *is_delimited)
 		len++;
 	}
 	if (*s == delimiter)
-	{
 		len++;
-		*is_delimited = 1;
-	}
-	else
-		*is_delimited = 0;
 	return (len);
 }
 
-int		strcat_del(char **line, char *to_catenate, char delimiter, int *is_delimited)
+int		strcat_del(char **line, char *to_catenate, char delimiter)
 {
 	int		cat_len;
 	char	*tab;
@@ -80,7 +75,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter, int *is_delimite
 
 	if (!to_catenate)
 		return (0);
-	cat_len = strdel_len(to_catenate, delimiter,is_delimited);
+	cat_len = strdel_len(to_catenate, delimiter);
 	if (!(newstr = (char *)malloc(ft_strlen(*line)+ cat_len + 1)))
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);

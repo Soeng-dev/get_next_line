@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/22 11:43:05 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/22 16:52:06 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,29 @@
 
 int		get_next_line(int fd, char **line)
 {
-	static char	backup[BUFFER_SIZE + 1];
-	static char	*next;
+	static char backup[BUFFER_SIZE + 1];
+	static char *newline;
+	char		*temp;
 	int			result;
-	int			unread;
-	int			is_newline;	
-
-	if (!line || BUFFER_SIZE <= 0)
-		return (ERROR);
-	while (1) 
+// when reads empty file, line = malloc1, line ='\0'
+	newline = backup;
+	while (*newline != '\n')
 	{
-		if (!next || next >= backup + BUFFER_SIZE)
-		{
-			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
-				return (ERROR);
-			for (int i = result; i <= BUFFER_SIZE; i++)
-				backup[i] = '\0';
-			if (result == END)
-			{
-				if (!next)
-				{
-					*line = (char *)malloc(1);
-					**line = '\0';
-				}
-				return (END);
-			}
-			unread = result;
-			next = backup;
-		}
-		//not directly alloc to line, use char *temp and when return success do line = temp;
-		if (
-		if ((result = strcat_del(line, next, '\n', &is_newline)) == ERROR)
+		if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 			return (ERROR);
-		unread -= result;
-		next += result;
-		if (is_newline)
-			return (SUCCESS);
+		else if (result == END)
+		{
+			//substitue to function
+			if (!next)
+			{
+				*line = (char *)malloc(1);
+				(*line)[0] = '\0';
+			}
+			return (END);
+		}
+		if 
+		
 	}
+	init_arr(backup);
+	return (SUCCESS);
 }
