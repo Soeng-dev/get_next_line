@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/24 02:57:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/24 04:37:28 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,33 @@
 int		get_next_line(int fd, char **line)
 {
 	static char *backup[OPEN_MAX];
+	char		buffer[BUFFER_SIZE + 1];
 	char		*temp;
-	//int			is_oneline;
-	int			bufsize;
+	int			is_oneline;
+	int			result;
 
 	if (fd < 0 || !line)
 		return (ERROR);
 	is_oneline = 0;
 	temp = NULL;
-	//make backup[fd] = NULL when *backup[fd] = \0;
-	//revise strcat_del for making temp = malloc(1), temp[0] = '\0'; when !backup[fd]
-	while (1)//!is_oneline)
+	if (!backup[fd])
+		*(backup[fd] = buffer) = '\0';
+	while (!is_oneline)
 	{
-		if (!backup[fd])
-			if ((bufsize = read(fd, backup[fd], BUFFER_SIZE)) == ERROR)
-				return (ERROR);	
-		backup[fd][bufsize] = '\0';
-		backup[fd] += strcat_del(&temp,backup[fd], '\n');
-		if (*(backup[fd] - 1) == '\n' || bufsize = END)
-		{
-			*line = temp;
-			if (bufsize)
-				return (SUCCESS);
-			else if (bufsize == END)
-				return (END);
-		}
+		if (*backup[fd] == '\0')
+			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+				return (ERROR);
+		//printf("read contents below:\n%s\n",buffer);
+		buffer[result] = '\0';
+		//printf("before cat\n");
+		backup[fd] = buffer + strcat_del(&temp,buffer, '\n') - 1;
+		if (*backup[fd] == '\n' || result == END)
+			is_oneline = 1;
+		if (*backup[fd] == '\n')
+			backup[fd]++;
 	}
+	*line = temp;
+	if (result == END)
+		return (END);
+	return (SUCCESS);
 }
