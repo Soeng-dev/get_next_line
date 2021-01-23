@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/22 19:51:45 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/24 02:57:07 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,31 @@
 
 int		get_next_line(int fd, char **line)
 {
-	static char backup[BUFFER_SIZE + 1];
-	static char *next;
+	static char *backup[OPEN_MAX];
 	char		*temp;
-	int			result;
+	//int			is_oneline;
+	int			bufsize;
 
 	if (fd < 0 || !line)
 		return (ERROR);
-	next = backup + 1;
+	is_oneline = 0;
 	temp = NULL;
-	while (*(next - 1) != '\n')
+	//make backup[fd] = NULL when *backup[fd] = \0;
+	//revise strcat_del for making temp = malloc(1), temp[0] = '\0'; when !backup[fd]
+	while (1)//!is_oneline)
 	{
-		if (next == backup || next >= backup + BUFFER_SIZE)
+		if (!backup[fd])
+			if ((bufsize = read(fd, backup[fd], BUFFER_SIZE)) == ERROR)
+				return (ERROR);	
+		backup[fd][bufsize] = '\0';
+		backup[fd] += strcat_del(&temp,backup[fd], '\n');
+		if (*(backup[fd] - 1) == '\n' || bufsize = END)
 		{
-			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
-				return (ERROR);
-			ft_memset((void*)(backup + result), '\0', BUFFER_SIZE + 1 - result);
-			if (result == END)
-			{
-				printf("here\n");
-				if (next == backup)
-				{
-					*line = (char *)malloc(1);
-					(*line)[0] = '\0';
-				}
-				else
-					*line = temp;
+			*line = temp;
+			if (bufsize)
+				return (SUCCESS);
+			else if (bufsize == END)
 				return (END);
-			}
 		}
-		ft_memset((void*)(backup + result), '\0', BUFFER_SIZE + 1 - result);
-		//should make strcat_del malloc temp = malloc1, temp[0] = '\0' when empty file read
-		if ((result = strcat_del(&temp, next, '\n')) == ERROR)
-			return (ERROR);
-		next += result;
 	}
-	*line = temp;
-	return (SUCCESS);
 }

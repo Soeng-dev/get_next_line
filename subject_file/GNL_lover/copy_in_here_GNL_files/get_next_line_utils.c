@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/22 18:40:00 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/24 02:21:34 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,6 @@ int		strdel_len(char *s, char delimiter)
 	if (*s == delimiter)
 		len++;
 	return (len);
-}
-
-void	*ft_memset(void *b, int c, int len)
-{
-	unsigned char	*tab;
-	tab = (unsigned char *)b;
-	while (--len >= 0)
-	{
-		*(tab) = (unsigned char)c;
-		tab++;
-	}
-	return (b);
 }
 
 int		strcat_del(char **line, char *to_catenate, char delimiter)
