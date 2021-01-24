@@ -6,18 +6,12 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/24 09:40:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/24 08:46:12 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void readbyint(char *str)
-{
-	while(*str)
-		printf("%d, ",(int)*(str++));
-	printf("\n");
-}
 int		get_next_line(int fd, char **line)
 {
 	static char *backup[OPEN_MAX];
@@ -30,26 +24,25 @@ int		get_next_line(int fd, char **line)
 		return (ERROR);
 	is_oneline = 0;
 	temp = NULL;
-//	if (!backup[fd])
-//		*(backup[fd] = buffer) = '\0';
+	if (!backup[fd])
+		*(backup[fd] = buffer) = '\0';
 	while (!is_oneline)
 	{
-		if (!backup[fd])
+		if (*backup[fd] == '\0')
 			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
+		//printf("read contents below:\n%s///\n",buffer);
 		buffer[result] = '\0';
-		backup[fd] = backup[fd] + strcat_del(&temp,buffer, '\n');
+		//printf("before cat\n");
+		backup[fd] = buffer + strcat_del(&temp,buffer, '\n');// - 1;
 		if (*backup[fd] == '\n' || result == END)
 			is_oneline = 1;
-		//readbyint(backup[fd]);
-		if (*(backup[fd]) == '\n')
+		printf("is oneline %d	result : %d\n	bu : %d	bf:%d\n",is_oneline,result, (int)*(backup[fd]),(int)buffer[result]);
+		if (*backup[fd] == '\n')
 			backup[fd]++;
 	}
 	*line = temp;
 	if (result == END)
-	{
-		backup[fd] = NULL;
 		return (END);
-	}
 	return (SUCCESS);
 }

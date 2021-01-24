@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 void 	putstr(char *s, int fd)
 {
@@ -19,7 +20,7 @@ void	main()
 	volatile int fd;
 		fd = open("./for_test.txt", O_RDWR);
 	
-	/*	
+
 	char 	* r= NULL;
 	char buf[100];
 	int i = SUCCESS;
@@ -27,11 +28,12 @@ void	main()
 	while(i == SUCCESS)
 	{
 		i = get_next_line(fd, &r);
-		printf("%d	|%s",i,r);
-	}*/
-		
-	char *buff[10];
-	int n = read(fd,buff[3],10);
-	printf("%d:%s \n", n, buff[3]);
-	
+
+		printf("return :%d		len:%d		|%s",i,strlen(r),r);
+	}
+//		
+//	char *buff[10];
+//	int n = read(fd,buff[3],10);
+//	printf("%d:%s \n", n, buff[3]);
+//
 }
