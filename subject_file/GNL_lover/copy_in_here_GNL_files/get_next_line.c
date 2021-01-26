@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/24 09:40:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/26 16:03:55 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,24 @@ int		get_next_line(int fd, char **line)
 		return (ERROR);
 	is_oneline = 0;
 	temp = NULL;
-//	if (!backup[fd])
-//		*(backup[fd] = buffer) = '\0';
 	while (!is_oneline)
 	{
 		if (!backup[fd])
+		{
 			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-		buffer[result] = '\0';
+			buffer[result] = '\0';
+			backup[fd] = buffer;
+		}
 		backup[fd] = backup[fd] + strcat_del(&temp,buffer, '\n');
-		if (*backup[fd] == '\n' || result == END)
+		//printf("%p\n", backup[fd]);
+		if (*(backup[fd]) == '\n' || result == END)
 			is_oneline = 1;
 		//readbyint(backup[fd]);
 		if (*(backup[fd]) == '\n')
 			backup[fd]++;
+		if (*(backup[fd]) == '\0')
+			backup[fd] = NULL;
 	}
 	*line = temp;
 	if (result == END)
