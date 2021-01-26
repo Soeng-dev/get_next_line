@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/26 18:21:41 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/26 18:46:51 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ int		get_next_line(int fd, char **line)
 		}
 		backup[fd] += strcat_del(&temp, backup[fd], '\n');
 		if (*(backup[fd]) == '\n' || result == END)
-		{
-			++backup[fd];
 			is_oneline = 1;
-		}
+		if (*(backup[fd]) == '\n')
+			++backup[fd];
 		if (*(backup[fd]) == '\0')
 			backup[fd] = NULL;
 	}
