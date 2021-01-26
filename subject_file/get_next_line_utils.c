@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/21 17:54:54 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/26 18:18:28 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int		strdel_len(char *s, char delimiter)
 		s++;
 		len++;
 	}
-	if (*s == delimiter)
-		len++;
 	return (len);
 }
 
@@ -81,6 +79,8 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	tab = ft_strcpy(newstr, *line);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
 	*tab = '\0';
+	if (*line)
+		free(*line);
 	*line = newstr;
 	return (cat_len);
 }

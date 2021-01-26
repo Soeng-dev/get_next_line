@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/21 17:59:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/26 18:21:41 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 int		get_next_line(int fd, char **line)
 {
-	static char	backup[BUFFER_SIZE + 1];
-	static char	*next;
-	int		result;
-	int		unread;	
+	static char *backup[OPEN_MAX];
+	char		buffer[BUFFER_SIZE + 1];
+	char		*temp;
+	int			is_oneline;
+	int			result;
 
-	if (!line || BUFFER_SIZE <= 0)
+	if (fd < 0 || !line)
 		return (ERROR);
-	while (1)
+	is_oneline = 0;
+	temp = NULL;
+	while (!is_oneline)
 	{
-		if (!next || next >= backup + BUFFER_SIZE)
+		if (!backup[fd])
 		{
-			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
+			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-			for (int i = result; i <= BUFFER_SIZE; i++)
-				backup[i] = '\0';
-			if (result == END)
-			{
-				if (!next)
-				{
-					*line = (char *)malloc(1);
-					**line = '\0';
-				}
-				return (END);
-			}
-			unread = result;
-			next = backup;
+			buffer[result] = '\0';
+			backup[fd] = buffer;
 		}
-		else if (unread == 0)
-			return (END);
-		if ((result = strcat_del(line, next, '\n')) == ERROR)
-			return (ERROR);
-		unread -= result;
-		next += result;
+		backup[fd] += strcat_del(&temp, backup[fd], '\n');
+		if (*(backup[fd]) == '\n' || result == END)
+		{
+			++backup[fd];
+			is_oneline = 1;
+		}
+		if (*(backup[fd]) == '\0')
+			backup[fd] = NULL;
+	}
+	*line = temp;
+	if (result == END)
+	{
+		backup[fd] = NULL;
+		return (END);
 	}
 	return (SUCCESS);
 }
