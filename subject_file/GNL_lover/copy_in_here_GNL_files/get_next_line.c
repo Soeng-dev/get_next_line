@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/26 16:03:55 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/26 17:15:06 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		get_next_line(int fd, char **line)
 	int			is_oneline;
 	int			result;
 
+	static int test;
+	test++;
 	if (fd < 0 || !line)
 		return (ERROR);
 	is_oneline = 0;
@@ -39,13 +41,11 @@ int		get_next_line(int fd, char **line)
 			buffer[result] = '\0';
 			backup[fd] = buffer;
 		}
-		backup[fd] = backup[fd] + strcat_del(&temp,buffer, '\n');
-		//printf("%p\n", backup[fd]);
+	//	printf("before cat : %p",backup[fd]);
+		backup[fd] += strcat_del(&temp, backup[fd], '\n');
+	//	printf("	after cat : %p\n",backup[fd]);
 		if (*(backup[fd]) == '\n' || result == END)
 			is_oneline = 1;
-		//readbyint(backup[fd]);
-		if (*(backup[fd]) == '\n')
-			backup[fd]++;
 		if (*(backup[fd]) == '\0')
 			backup[fd] = NULL;
 	}
@@ -55,5 +55,6 @@ int		get_next_line(int fd, char **line)
 		backup[fd] = NULL;
 		return (END);
 	}
+	//printf("iterate:%d result:%d\n",test,result);
 	return (SUCCESS);
 }

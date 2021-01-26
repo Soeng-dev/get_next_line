@@ -18,20 +18,20 @@ void 	putstr(char *s, int fd)
 void	main()
 {
 	volatile int fd;
-		fd = open("./for_test.txt", O_RDWR);
-	
-
+		fd = open("../GNL_lover/test_files_GNL/test_file3", O_RDWR);
 	char 	* r= NULL;
 	char buf[100];
 	int i = SUCCESS;
+//
+//	while ((i = read(fd, buf, 4)));
+//	for (int i = 0; i < 4; i++)
+//		printf("i:%d|%d\n", i, (int)buf[i]);
+//
+//
 
-	while(i == SUCCESS)
-	{
-		i = get_next_line(fd, &r);
-
+	while((i = get_next_line(fd, &r))== SUCCESS)
 		printf("return :%d		len:%d		|%s",i,strlen(r),r);
-	}
-//		
+		
 //	char *buff[10];
 //	int n = read(fd,buff[3],10);
 //	printf("%d:%s \n", n, buff[3]);
