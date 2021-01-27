@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 18:41:02 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 19:32:19 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int		get_next_line(int fd, char **line)
 	next = backup[fd];
 	temp = NULL;
 	result = get_oneline_and_next(&next, backup[fd], &temp, fd);
-	printf("check next is right\nnext:%s\n", next);
+	//printf("check next is right\nnext:%s\n", next);
 	if (result == ERROR)
 		return (ERROR);
 	*line = temp;
 	if (result == END)
 		return (END);
-	ft_memmove(backup[fd], next, backup[fd] + BUFFER_SIZE - next);
-	printf("check bu after memmove\nnext:%s\n",backup[fd]);
+	ft_memmove(backup[fd], next, ((backup[fd] - next) / sizeof(char *)) + BUFFER_SIZE + 1);
+	//printf("check bu after memmove\nnext:%s\n",backup[fd]);
 	return (SUCCESS);
 }

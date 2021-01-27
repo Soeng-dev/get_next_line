@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 18:31:58 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 19:16:07 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	*ft_memmove(void *dst, const void *src, int len)
 		while (--len >= 0)
 		{
 			*dst_tab = *src_tab;
+			//printf("%c",(*dst_tab = *src_tab));
 			--dst_tab;
 			--src_tab;
 		}
@@ -88,10 +89,12 @@ void	*ft_memmove(void *dst, const void *src, int len)
 		while (--len >= 0)
 		{
 			*dst_tab = *src_tab;
+			//printf("%c",(*dst_tab = *src_tab));
 			dst_tab++;
 			src_tab++;
 		}
 	}
+	//printf("\n");
 	return (dst);
 }
 int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
