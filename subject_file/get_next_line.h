@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 13:54:59 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 14:35:19 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		strcat_del(char **line, char *to_catenate, char delimiter);
 int		min(int a, int b);
 int		get_next_line(int fd, char **line);
 void	ft_memmove(void *dst, const void *src, int len);
-int		allocate_oneline(char **next, char *buffer, char **temp, int fd);
-int		allocline_and_backup(char **next, char *buffer, char **temp, int fd);
+int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd);
+int		get_oneline_and_backup(char **next, char *buffer, char **temp, int fd);
 #endif

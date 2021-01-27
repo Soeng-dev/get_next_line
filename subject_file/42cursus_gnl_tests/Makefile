@@ -2,7 +2,7 @@
 GET_NEXT_LINE_FOLDER="/Users/soekim/get_next_line/subject_file/"
 # test bonus?
 # set to 'yes' or 'no'
-BONUS=no
+BONUS=yes
 
 # what buffer sizes to test, seperated by space
 BUF_SIZE_TESTS="1 2 5 6 20 25 1024 5000 10000000"

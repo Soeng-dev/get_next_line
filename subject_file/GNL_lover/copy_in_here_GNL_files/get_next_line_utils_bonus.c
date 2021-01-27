@@ -6,24 +6,11 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 14:02:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 14:46:51 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strcpy(char *dst, const char *src)
-{
-	if (!dst || !src)
-		return (dst);
-	while (*src)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	return (dst);
-}
 
 char	*ft_strncpy(char *dst, const char *src, int len)
 {
@@ -55,16 +42,18 @@ int		strdel_len(char *s, char delimiter)
 
 int		strcat_del(char **line, char *to_catenate, char delimiter)
 {
+	int		line_len;
 	int		cat_len;
 	char	*tab;
 	char	*newstr;
 
 	if (!to_catenate)
 		return (0);
+	line_len = strdel_len(*line, '\0');
 	cat_len = strdel_len(to_catenate, delimiter);
-	if (!(newstr = (char *)malloc(strdel_len(*line, '\0') + cat_len + 1)))
+	if (!(newstr = (char *)malloc(line_len + cat_len + 1)))
 		return (ERROR);
-	tab = ft_strcpy(newstr, *line);
+	tab = ft_strncpy(newstr, *line, line_len);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
 	*tab = '\0';
 	if (*line)
@@ -73,32 +62,65 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
+void	*ft_memmove(void *dst, const void *src, int len)
+{
+	char	*dst_tab;
+	char	*src_tab;
+
+	if (!dst && !src)
+		return (0);
+	dst_tab = (char *)dst;
+	dst_tab[len] = '\0';
+	if (dst_tab > src_tab)
+	{
+		dst_tab += len - 1;
+		src_tab += len - 1;
+		while (--len >= 0)
+		{
+			*dst_tab = *src_tab;
+			--dst_tab;
+			--src_tab;
+		}
+	}	
+	else
+	{
+		while (--len >= 0)
+		{
+			*dst_tab = *src_tab;
+			dst_tab++;
+			src_tab++;
+		}
+	}
+	return (dst);
+}
+int		get_oneline_and_backup(char **next, char *backup, char **temp, int fd)
 {
 	int is_oneline;
-	int result;
+	int read_result;
 	int catlen;
 
 	is_oneline = 0;
-	result = 1;
+	read_result = 1;
 	while (!is_oneline)
 	{
 		if (!(*next))
 		{
-			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+			if ((read_result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-			buffer[result] = '\0';
-			*next = buffer;
+			backup[read_result] = '\0';
+			*next = backup;
 		}
-		if ((catlen = strcat_del(temp, *next, '\n')) == ERROR)
+		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
 			return (ERROR);
 		*next += catlen;
-		if (**next == '\n' || result == END)
+		ft_memmove(backup, *next, catlen);
+		if (**next == '\n' || read_result == END)
 			is_oneline = 1;
 		if (**next == '\n')
 			++(*next);
 		if (**next == '\0')
 			*next = NULL;
 	}
-	return (result);
+	
+	return (read_result);
 }

@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 12:21:18 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 14:44:45 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 int		get_next_line(int fd, char **line)
 {
-	static char *next;
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	backup[OPEN_MAX][BUFFER_SIZE + 1];
+	char		*next;
 	char		*temp;
 	int			result;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (ERROR);
+	next = NULL;
 	temp = NULL;
-	result = get_oneline_and_next(&next, buffer, &temp, fd);
+	result = get_oneline_and_backup(&next, backup[fd], &temp, fd);
 	if (result == ERROR)
 		return (ERROR);
 	*line = temp;
 	if (result == END)
-	{
-		next = NULL;
 		return (END);
-	}
 	return (SUCCESS);
 }
