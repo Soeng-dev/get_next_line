@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 14:10:22 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 15:38:18 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ void	*ft_memmove(void *dst, const void *src, int len)
 	char	*dst_tab;
 	char	*src_tab;
 
-	if (!dst && !src)
-		return (0);
+	if (!src)
+		return (NULL);
+	src_tab = (char *)src;
 	dst_tab = (char *)dst;
 	dst_tab[len] = '\0';
 	if (dst_tab > src_tab)
+	{
 		dst_tab += len - 1;
 		src_tab += len - 1;
 		while (--len >= 0)
@@ -112,13 +114,13 @@ int		get_oneline_and_backup(char **next, char *backup, char **temp, int fd)
 		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
 			return (ERROR);
 		*next += catlen;
-		ft_memmove(backup, *next, catlen);
 		if (**next == '\n' || read_result == END)
 			is_oneline = 1;
 		if (**next == '\n')
 			++(*next);
 		if (**next == '\0')
 			*next = NULL;
+		ft_memmove(backup, *next, (backup + BUFFER_SIZE - *next) / sizeof(char *));
 	}
 	
 	return (read_result);
