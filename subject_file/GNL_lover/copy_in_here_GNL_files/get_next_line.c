@@ -22,26 +22,9 @@ int		get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line)
 		return (ERROR);
-	result = 1;
 	is_oneline = 0;
 	temp = NULL;
-	while (!is_oneline)
-	{
-		if (!backup)
-		{
-			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
-				return (ERROR);
-			buffer[result] = '\0';
-			backup = buffer;
-		}
-		backup += strcat_del(&temp, backup, '\n');
-		if (*(backup) == '\n' || result == END)
-			is_oneline = 1;
-		if (*(backup) == '\n')
-			++backup;
-		if (*(backup) == '\0')
-			backup = NULL;
-	}
+	result = make_oneline(&backup, buffer, &temp, &is_oneline, fd)
 	*line = temp;
 	if (result == END)
 	{

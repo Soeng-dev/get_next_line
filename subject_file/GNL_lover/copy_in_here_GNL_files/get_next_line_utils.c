@@ -85,3 +85,27 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	*line = newstr;
 	return (cat_len);
 }
+
+int		make_oneline(char **backup, char *buffer, char **temp, int *is_oneline, int fd)
+{
+	int read_result;
+
+	read_result = 1;
+	while (!(*is_oneline))
+	{
+		if (!(*backup))
+		{
+			if ((read_result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+				return (ERROR);
+			buffer[read_result] = '\0';
+			*backup = buffer;
+		}
+		*backup += strcat_del(temp, *backup, '\n');
+		if (**backup == '\n' || read_result == END)
+			*is_oneline = 1;
+		if (**backup == '\n')
+			++(*backup);
+		if (**backup == '\0')
+			*backup = NULL;
+	}
+}
