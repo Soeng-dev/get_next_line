@@ -27,6 +27,7 @@ int		main()
 //	for (int i = 0; i < 4; i++)
 //		printf("i:%d|%d\n", i, (int)buf[i]);
 
+	printf("BUFFER SIZE : %d\n\n",BUFFER_SIZE);
 	while((i = get_next_line(fd, &r)) == SUCCESS)
-		printf("return :%d		len:%ld		|%s\n",i,strlen(r),r);
+		printf("return :%d		len:%ld		|%s\n\n",i,strlen(r),r);
 }
