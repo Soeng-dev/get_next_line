@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 17:25:06 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 18:09:12 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 	result = 1;
 	while (!is_oneline)
 	{
-		if (!(*next))
+		if (!(*next) || backup[0])
 		{
 			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
