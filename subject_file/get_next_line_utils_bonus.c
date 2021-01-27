@@ -6,24 +6,11 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 12:19:39 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 12:29:20 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strcpy(char *dst, const char *src)
-{
-	if (!dst || !src)
-		return (dst);
-	while (*src)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	return (dst);
-}
 
 char	*ft_strncpy(char *dst, const char *src, int len)
 {
@@ -55,16 +42,18 @@ int		strdel_len(char *s, char delimiter)
 
 int		strcat_del(char **line, char *to_catenate, char delimiter)
 {
+	int		line_len;
 	int		cat_len;
 	char	*tab;
 	char	*newstr;
 
 	if (!to_catenate)
 		return (0);
+	line_len = strdel_len(*line, '\0');
 	cat_len = strdel_len(to_catenate, delimiter);
-	if (!(newstr = (char *)malloc(strdel_len(*line, '\0') + cat_len + 1)))
+	if (!(newstr = (char *)malloc(line_len + cat_len + 1)))
 		return (ERROR);
-	tab = ft_strcpy(newstr, *line);
+	tab = ft_strncpy(newstr, *line, line_len);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
 	*tab = '\0';
 	if (*line)
@@ -99,3 +88,5 @@ int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
 	}
 	return (result);
 }
+
+void	ft_memmove()
