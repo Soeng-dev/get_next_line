@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 10:12:48 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 11:26:51 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,29 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		make_oneline(char **backup, char *buffer, char **temp, int fd)
+int		allocate_oneline(char **backup, char *buffer, char **temp, int fd)
 {
 	int is_oneline;
-	int read_result;
+	int result;
 
 	is_oneline = 0;
-	read_result = 1;
+	result = 1;
 	while (!is_oneline)
 	{
 		if (!(*backup))
 		{
-			if ((read_result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-			buffer[read_result] = '\0';
+			buffer[result] = '\0';
 			*backup = buffer;
 		}
 		*backup += strcat_del(temp, *backup, '\n');
-		if (**backup == '\n' || read_result == END)
+		if (**backup == '\n' || result == END)
 			is_oneline = 1;
 		if (**backup == '\n')
 			++(*backup);
 		if (**backup == '\0')
 			*backup = NULL;
 	}
-	return (read_result);
+	return (result);
 }
