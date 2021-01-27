@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 19:16:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 20:25:02 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ void	*ft_memmove(void *dst, const void *src, int len)
 {
 	char	*dst_tab;
 	char	*src_tab;
+	int		end;
 
 	if (!src)
 		return (NULL);
+	end = len;
 	src_tab = (char *)src;
 	dst_tab = (char *)dst;
-	dst_tab[len] = '\0';
 	if (dst_tab > src_tab)
 	{
 		dst_tab += len - 1;
@@ -94,6 +95,7 @@ void	*ft_memmove(void *dst, const void *src, int len)
 			src_tab++;
 		}
 	}
+	dst_tab[end] = '\0';
 	//printf("\n");
 	return (dst);
 }
