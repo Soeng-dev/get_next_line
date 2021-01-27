@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 16:23:18 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 17:25:06 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,34 +94,32 @@ void	*ft_memmove(void *dst, const void *src, int len)
 	}
 	return (dst);
 }
-int		get_oneline_and_backup(char **next, char *backup, char **temp, int fd)
+int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 {
 	int is_oneline;
-	int read_result;
+	int result;
 	int catlen;
 
 	is_oneline = 0;
-	read_result = 1;
+	result = 1;
 	while (!is_oneline)
 	{
 		if (!(*next))
 		{
-			if ((read_result = read(fd, backup, BUFFER_SIZE)) == ERROR)
+			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-			backup[read_result] = '\0';
+			backup[result] = '\0';
 			*next = backup;
 		}
 		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
 			return (ERROR);
 		*next += catlen;
-		if (**next == '\n' || read_result == END)
+		if (**next == '\n' || result == END)
 			is_oneline = 1;
 		if (**next == '\n')
 			++(*next);
 		if (**next == '\0')
 			*next = NULL;
-		ft_memmove(backup, *next, (backup + BUFFER_SIZE - *next) / sizeof(char *));
 	}
-	
-	return (read_result);
+	return (result);
 }

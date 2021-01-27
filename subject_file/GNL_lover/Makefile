@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/18 18:51:52 by charmstr          #+#    #+#              #
-#    Updated: 2021/01/27 16:28:27 by soekim           ###   ########.fr        #
+#    Updated: 2021/01/27 17:37:42 by soekim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,7 +122,7 @@ clean:
 
 fclean: clean
 #	@echo "\t\t$(REMOVE_FG)deleting $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(REMOVE_FG)...$(CLEAR_COLOR)" 
-	#@rm -rf user_output
+	@rm -rf user_output
 	@rm -rf $(NAME)
 
 #clean_name:
