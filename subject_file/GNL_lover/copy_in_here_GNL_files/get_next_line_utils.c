@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/26 18:18:28 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 09:09:43 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ size_t	ft_strlen(const char *s)
 			len++;
 	}
 	return (len);
-	
 }
 
 char	*ft_strcpy(char *dst, const char *src)
@@ -38,6 +37,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	}
 	return (dst);
 }
+
 char	*ft_strncpy(char *dst, const char *src, int len)
 {
 	if (!dst || !src)
@@ -50,6 +50,7 @@ char	*ft_strncpy(char *dst, const char *src, int len)
 	}
 	return (dst);
 }
+
 int		strdel_len(char *s, char delimiter)
 {
 	int		len;
@@ -74,7 +75,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	if (!to_catenate)
 		return (0);
 	cat_len = strdel_len(to_catenate, delimiter);
-	if (!(newstr = (char *)malloc(ft_strlen(*line)+ cat_len + 1)))
+	if (!(newstr = (char *)malloc(ft_strlen(*line) + cat_len + 1)))
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
