@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 11:26:51 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 12:22:11 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		allocate_oneline(char **backup, char *buffer, char **temp, int fd)
+int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
 {
 	int is_oneline;
 	int result;
@@ -82,20 +82,20 @@ int		allocate_oneline(char **backup, char *buffer, char **temp, int fd)
 	result = 1;
 	while (!is_oneline)
 	{
-		if (!(*backup))
+		if (!(*next))
 		{
 			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
 			buffer[result] = '\0';
-			*backup = buffer;
+			*next = buffer;
 		}
-		*backup += strcat_del(temp, *backup, '\n');
-		if (**backup == '\n' || result == END)
+		*next += strcat_del(temp, *next, '\n');
+		if (**next == '\n' || result == END)
 			is_oneline = 1;
-		if (**backup == '\n')
-			++(*backup);
-		if (**backup == '\0')
-			*backup = NULL;
+		if (**next == '\n')
+			++(*next);
+		if (**next == '\0')
+			*next = NULL;
 	}
 	return (result);
 }

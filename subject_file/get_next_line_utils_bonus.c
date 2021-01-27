@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 12:04:18 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 12:19:39 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		allocate_oneline(char **backup, char *buffer, char **temp, int fd)
+int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
 {
 	int is_oneline;
 	int result;
@@ -82,47 +82,20 @@ int		allocate_oneline(char **backup, char *buffer, char **temp, int fd)
 	result = 1;
 	while (!is_oneline)
 	{
-		if (!(*backup))
+		if (!(*next))
 		{
 			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
 			buffer[result] = '\0';
-			*backup = buffer;
+			*next = buffer;
 		}
-		*backup += strcat_del(temp, *backup, '\n');
-		if (**backup == '\n' || result == END)
+		*next += strcat_del(temp, *next, '\n');
+		if (**next == '\n' || result == END)
 			is_oneline = 1;
-		if (**backup == '\n')
-			++(*backup);
-		if (**backup == '\0')
-			*backup = NULL;
-	}
-	return (result);
-}
-
-int		alloc_oneline_fd(char *backup, char **temp, int fd)
-{
-	int is_oneline;
-	int result;
-
-	is_oneline = 0;
-	result = 1;
-	while (!is_oneline)
-	{
-		// change !backup condition, use memmove to back up
-		if (!(*backup))
-		{
-			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
-				return (ERROR);
-			backup[result] = '\0';
-		}
-		*backup += strcat_del(temp, *backup, '\n');
-		if (**backup == '\n' || result == END)
-			is_oneline = 1;
-		if (**backup == '\n')
-			++(*backup);
-		if (**backup == '\0')
-			*backup = NULL;
+		if (**next == '\n')
+			++(*next);
+		if (**next == '\0')
+			*next = NULL;
 	}
 	return (result);
 }
