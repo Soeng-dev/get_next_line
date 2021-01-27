@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 12:29:20 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 14:10:22 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,36 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	*line = newstr;
 	return (cat_len);
 }
-
-int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
+// need to add null at the end of dst
+void	ft_memmove()
+int		allocline_and_backup(char **next, char *backup, char **temp, int fd)
 {
 	int is_oneline;
-	int result;
+	int read_result;
+	int catlen;
 
 	is_oneline = 0;
-	result = 1;
+	read_result = 1;
 	while (!is_oneline)
 	{
 		if (!(*next))
 		{
-			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+			if ((read_result = read(fd, backup, BUFFER_SIZE)) == ERROR)
 				return (ERROR);
-			buffer[result] = '\0';
-			*next = buffer;
+			backup[read_result] = '\0';
+			*next = backup;
 		}
-		*next += strcat_del(temp, *next, '\n');
-		if (**next == '\n' || result == END)
+		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
+			return (ERROR);
+		*next += catlen;
+		ft_memmove(backup, *next, catlen);
+		if (**next == '\n' || read_result == END)
 			is_oneline = 1;
 		if (**next == '\n')
 			++(*next);
 		if (**next == '\0')
 			*next = NULL;
 	}
-	return (result);
+	
+	return (read_result);
 }
-
-void	ft_memmove()

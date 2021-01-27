@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 12:22:11 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 14:02:07 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
 {
 	int is_oneline;
 	int result;
+	int catlen;
 
 	is_oneline = 0;
 	result = 1;
@@ -89,7 +90,9 @@ int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
 			buffer[result] = '\0';
 			*next = buffer;
 		}
-		*next += strcat_del(temp, *next, '\n');
+		if ((catlen = strcat_del(temp, *next, '\n')) == ERROR)
+			return (ERROR);
+		*next += catlen;
 		if (**next == '\n' || result == END)
 			is_oneline = 1;
 		if (**next == '\n')
