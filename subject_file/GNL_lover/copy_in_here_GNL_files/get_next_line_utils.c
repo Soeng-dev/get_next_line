@@ -6,24 +6,11 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 10:02:50 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 10:12:48 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	if (s)
-	{
-		while (*(s++))
-			len++;
-	}
-	return (len);
-}
 
 char	*ft_strcpy(char *dst, const char *src)
 {
@@ -75,7 +62,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	if (!to_catenate)
 		return (0);
 	cat_len = strdel_len(to_catenate, delimiter);
-	if (!(newstr = (char *)malloc(ft_strlen(*line) + cat_len + 1)))
+	if (!(newstr = (char *)malloc(strdel_len(*line, '\0') + cat_len + 1)))
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
