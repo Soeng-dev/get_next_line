@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 11:25:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 11:37:37 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		get_next_line(int fd, char **line)
 	char		*temp;
 	int			result;
 
-	if (fd < 0 || !line)
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (ERROR);
 	temp = NULL;
 	result = allocate_oneline(&backup, buffer, &temp, fd);
