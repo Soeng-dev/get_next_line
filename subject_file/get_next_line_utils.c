@@ -73,7 +73,7 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		allocate_oneline(char **next, char *buffer, char **temp, int fd)
+int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
 {
 	int is_oneline;
 	int result;

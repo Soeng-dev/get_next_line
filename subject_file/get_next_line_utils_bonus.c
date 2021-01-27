@@ -61,9 +61,38 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	*line = newstr;
 	return (cat_len);
 }
-// need to add null at the end of dst
-void	ft_memmove()
-int		allocline_and_backup(char **next, char *backup, char **temp, int fd)
+
+void	*ft_memmove(void *dst, const void *src, int len)
+{
+	char	*dst_tab;
+	char	*src_tab;
+
+	if (!dst && !src)
+		return (0);
+	dst_tab = (char *)dst;
+	dst_tab[len] = '\0';
+	if (dst_tab > src_tab)
+		dst_tab += len - 1;
+		src_tab += len - 1;
+		while (--len >= 0)
+		{
+			*dst_tab = *src_tab;
+			--dst_tab;
+			--src_tab;
+		}
+	}	
+	else
+	{
+		while (--len >= 0)
+		{
+			*dst_tab = *src_tab;
+			dst_tab++;
+			src_tab++;
+		}
+	}
+	return (dst);
+}
+int		get_oneline_and_backup(char **next, char *backup, char **temp, int fd)
 {
 	int is_oneline;
 	int read_result;

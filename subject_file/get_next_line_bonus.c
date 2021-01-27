@@ -23,7 +23,7 @@ int		get_next_line(int fd, char **line)
 		return (ERROR);
 	next = NULL
 	temp = NULL;
-	result = allocline_and_backup(&next, backup, &temp, fd);
+	result = get_oneline_and_backup(&next, backup, &temp, fd);
 	if (result == ERROR)
 		return (ERROR);
 	*line = temp;

@@ -22,7 +22,7 @@ int		get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (ERROR);
 	temp = NULL;
-	result = allocate_oneline(&next, buffer, &temp, fd);
+	result = get_oneline_and_next(&next, buffer, &temp, fd);
 	if (result == ERROR)
 		return (ERROR);
 	*line = temp;

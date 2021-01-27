@@ -30,7 +30,7 @@ int		strdel_len(char *s, char delimiter);
 int		strcat_del(char **line, char *to_catenate, char delimiter);
 int		min(int a, int b);
 int		get_next_line(int fd, char **line);
-void	ft_memmove(void *dst, const void *src, size_t len);
+void	ft_memmove(void *dst, const void *src, int len);
 int		allocate_oneline(char **next, char *buffer, char **temp, int fd);
 int		allocline_and_backup(char **next, char *buffer, char **temp, int fd);
 #endif
