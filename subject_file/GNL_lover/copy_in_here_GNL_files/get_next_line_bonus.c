@@ -6,11 +6,11 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 14:44:45 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/27 16:23:09 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int		get_next_line(int fd, char **line)
 {

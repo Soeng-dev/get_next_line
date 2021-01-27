@@ -188,5 +188,5 @@ then
 	echo "  ===>  END "
 fi
 
-rm user_output
+#m user_output
 make fclean
