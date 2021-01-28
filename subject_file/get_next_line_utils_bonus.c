@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 20:34:40 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/28 14:49:12 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ void	*ft_memmove(void *dst, const void *src, int len)
 {
 	char	*dst_tab;
 	char	*src_tab;
-	//int		end;
 
 	if (!src)
 		return (NULL);
-	//end = len;
 	src_tab = (char *)src;
 	dst_tab = (char *)dst;
 	if (dst_tab > src_tab)
@@ -80,7 +78,6 @@ void	*ft_memmove(void *dst, const void *src, int len)
 		while (--len >= 0)
 		{
 			*dst_tab = *src_tab;
-			//printf("%c",(*dst_tab = *src_tab));
 			--dst_tab;
 			--src_tab;
 		}
@@ -90,13 +87,10 @@ void	*ft_memmove(void *dst, const void *src, int len)
 		while (--len >= 0)
 		{
 			*dst_tab = *src_tab;
-			//printf("%c",(*dst_tab = *src_tab));
 			dst_tab++;
 			src_tab++;
 		}
 	}
-	//dst_tab[end] = '\0';
-	//printf("\n");
 	return (dst);
 }
 int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
@@ -109,7 +103,6 @@ int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 	result = 1;
 	while (!is_oneline)
 	{
-		//printf("1\n");
 		if (!backup[0])
 		{
 			if ((result = read(fd, backup, BUFFER_SIZE)) == ERROR)
@@ -119,19 +112,13 @@ int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 		}
 		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
 			return (ERROR);
-
-		//printf("2\n");
 		*next += catlen;
 		if (**next == '\n' || result == END)
 			is_oneline = 1;
-			//printf("3\n");
 		if (**next == '\n')
 			++(*next);
-			//printf("4\n");
 		if (**next == '\0')
 			backup[0] = '\0';
-	//printf("5\n");
-		
 	}
 	return (result);
 }
