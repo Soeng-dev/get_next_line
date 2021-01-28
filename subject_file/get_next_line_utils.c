@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/27 14:02:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:17:45 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
 		*next += catlen;
 		if (**next == '\n' || result == END)
 			is_oneline = 1;
-		if (**next == '\n')
-			++(*next);
+		*next = (**next == '\n') ? (*next + 1) : (*next);
 		if (**next == '\0')
 			*next = NULL;
 	}

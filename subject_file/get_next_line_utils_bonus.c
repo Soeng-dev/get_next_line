@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/28 14:49:12 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:18:21 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,19 @@ void	*ft_memmove(void *dst, const void *src, int len)
 	dst_tab = (char *)dst;
 	if (dst_tab > src_tab)
 	{
-		dst_tab += len - 1;
-		src_tab += len - 1;
+		dst_tab += len;
+		src_tab += len;
 		while (--len >= 0)
-		{
-			*dst_tab = *src_tab;
-			--dst_tab;
-			--src_tab;
-		}
-	}	
+			*(--dst_tab) = *(--src_tab);
+	}
 	else
 	{
 		while (--len >= 0)
-		{
-			*dst_tab = *src_tab;
-			dst_tab++;
-			src_tab++;
-		}
+			*(dst_tab++) = *(src_tab++);
 	}
 	return (dst);
 }
+
 int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 {
 	int is_oneline;
@@ -110,13 +103,12 @@ int		get_oneline_and_next(char **next, char *backup, char **temp, int fd)
 			backup[result] = '\0';
 			*next = backup;
 		}
-		if((catlen = strcat_del(temp, *next, '\n')) == ERROR)
+		if ((catlen = strcat_del(temp, *next, '\n')) == ERROR)
 			return (ERROR);
 		*next += catlen;
 		if (**next == '\n' || result == END)
 			is_oneline = 1;
-		if (**next == '\n')
-			++(*next);
+		*next = (**next == '\n') ? (*next + 1) : (*next);
 		if (**next == '\0')
 			backup[0] = '\0';
 	}

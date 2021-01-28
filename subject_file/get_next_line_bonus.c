@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/01/28 15:01:07 by soekim           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:07:24 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int		get_next_line(int fd, char **line)
 	*line = temp;
 	if (result == END)
 		return (END);
-	ft_memmove(backup[fd], next, (int)(BUFFER_SIZE + 1 - ((next - backup[fd]) / sizeof(char*))));
+	ft_memmove(backup[fd], next, BUFFER_SIZE + 1 - (next - backup[fd]));
 	return (SUCCESS);
 }
